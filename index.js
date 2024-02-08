@@ -6,7 +6,7 @@ const userRouters = require("./routes/userRoutes");
 const userRoutersTest = require("./routes/userRoutesTest");
 const app = express();
 require("dotenv").config();
-
+const port = process.env.PORT || 4000;
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", userRouters);
@@ -25,6 +25,6 @@ mongoose
   })
   .catch((err) => console.log(err.message));
 
-const server = app.listen(process.env.PORT, () => {
-  console.log("Server started on port:", process.env.PORT);
+const server = app.listen(port, () => {
+  console.log("Server started on port:", port);
 });
