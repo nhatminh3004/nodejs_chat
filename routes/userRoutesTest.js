@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const UserLong = require("../model/longSchema");
+const mongoose = require("mongoose");
 router.get("/getAll", async (req, res, next) => {
   try {
     const users = await UserLong.find().select([
@@ -60,12 +61,14 @@ router.put("/update", async (req, res, next) => {
   }
 });
 router.delete("/delete", async (req, res, next) => {
+  console.log(req.body);
   try {
     const { _id } = req.body;
 
     // Xóa user theo ID
-    await UserLong.findByIdAndDelete(_id);
-
+    const data = await UserLong.findById(_id);
+    const result = await UserLong.findOneAndDelete(data._id);
+    console.log(result);
     res.json({ message: "Xóa user thành công!" });
   } catch (error) {
     next(error);
