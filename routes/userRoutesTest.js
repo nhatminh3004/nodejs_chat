@@ -67,9 +67,11 @@ router.delete("/delete", async (req, res, next) => {
 
     // Xóa user theo ID
     const data = await UserLong.findById(_id);
-    const result = await UserLong.findOneAndDelete(data._id);
-    console.log(result);
-    res.json({ message: "Xóa user thành công!" });
+    if (data) {
+      const result = await UserLong.findOneAndDelete(data._id);
+      console.log(result);
+      res.json({ message: "Xóa user thành công!" });
+    }
   } catch (error) {
     next(error);
   }
