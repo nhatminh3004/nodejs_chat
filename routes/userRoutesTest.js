@@ -60,7 +60,7 @@ router.put("/update", async (req, res, next) => {
     next(error);
   }
 });
-router.delete("/delete", async (req, res, next) => {
+router.post("/delete", async (req, res, next) => {
   console.log(req.body);
   try {
     const { _id } = req.body;
