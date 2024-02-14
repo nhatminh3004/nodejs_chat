@@ -1,6 +1,16 @@
 const router = require("express").Router();
 const UserLong = require("../model/longSchema");
+const DichVuLong = require("../model/dichvuLongSchema");
+
 const mongoose = require("mongoose");
+router.get("/getAllDichVu", async (req, res, next) => {
+  try {
+    const services = await DichVuLong.find({});
+    return res.json(services);
+  } catch (error) {
+    next(error);
+  }
+});
 router.get("/getAll", async (req, res, next) => {
   try {
     const users = await UserLong.find().select([
